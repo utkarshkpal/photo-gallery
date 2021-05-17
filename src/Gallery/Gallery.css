@@ -1,0 +1,60 @@
+.img-container {
+  padding: 1.5rem;
+  max-height: 800px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 1.2rem;
+  grid-template-areas:
+    "item1 item1 item1 item1 item2 item2"
+    "item1 item1 item1 item1 item2 item2"
+    "item1 item1 item1 item1 item3 item3"
+    "item1 item1 item1 item1 item3 item3"
+    "item4 item4 item4 item5 item5 item5"
+    "item4 item4 item4 item5 item5 item5"
+    "item4 item4 item4 item5 item5 item5";
+}
+
+.img-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.item1 {
+  grid-area: item1;
+}
+
+.item2 {
+  grid-area: item2;
+}
+
+.item3 {
+  grid-area: item3;
+}
+
+.item4 {
+  grid-area: item4;
+}
+
+.item5 {
+  grid-area: item5;
+}
+
+@media only screen and (max-width: 450px) {
+  .img-container {
+    padding: 1.5rem;
+    max-height: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 1.2rem;
+    grid-template-areas:
+      "item1 "
+      "item2 "
+      "item3 "
+      "item4 "
+      "item5 ";
+  }
+}

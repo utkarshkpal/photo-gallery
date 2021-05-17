@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import Layout from "./Layout/Layout";
+import Gallery from "./Gallery/Gallery";
 
 function App() {
+  const [images, setImages] = useState([]);
+  const [currPage, setCurrPage] = useState(1);
+
+  const fetchImages = async (page) => {
+    const response = await fetch(
+      `https://picsum.photos/v2/list?page=${page}&limit=5`
+    );
+    const data = await response.json();
+    return data;
+  };
+
+  const updateImages = async (page) => {
+    const newImages = await fetchImages(page);
+    setImages([...images, newImages]);
+  };
+
+  useEffect(() => {
+    updateImages(currPage);
+
+    return () => {
+      //cleanup
+    };
+  }, [currPage]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="app">
+      <Layout>
+        <section className="gallery">
+          {images.map((batch) => (
+            <Gallery key={batch[0].id} images={batch} />
+          ))}
+        </section>
+        <button
+          className="btn"
+          onClick={() => {
+            setCurrPage(currPage + 1);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Load More
+        </button>
+      </Layout>
     </div>
   );
 }
