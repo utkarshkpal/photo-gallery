@@ -57,4 +57,7 @@
       "item4 "
       "item5 ";
   }
+  .img-item {
+    max-height: 254px;
+  }
 }
